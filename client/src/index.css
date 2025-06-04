@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+*{               /*this select all element and make font same for complete website*/
+  font-family: "Outfit", sans-serif;    
+}
+::-webkit-scrollbar {  /*for hiding scroll bar*/
+  display: none;
+}
+/* for sinlge color code */
+@theme {            
+  --color-primary: #5044E5;      
+}
