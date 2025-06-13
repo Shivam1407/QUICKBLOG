@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { assets, dashboard_data } from '../../assets/assets'
+import BlogTableItem from '../../components/admin/BlogTableItem'
 
 const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState({
@@ -7,7 +8,7 @@ const Dashboard = () => {
         comments: 0,
         drafts: 0,
         recentBlogs: []
-    })
+    })  //initial values to avoid UI crashing
     const fetchDashboard = async ()=>{
         setDashboardData(dashboard_data)
     }
@@ -45,7 +46,7 @@ const Dashboard = () => {
             <p>Latest Blogs</p>
         </div>
         <div className='relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-white'>
-        <table className="w-full text-sm text-gray-50 ">
+        <table className="w-full text-sm text-gray-500 ">
             <thead className="text-xs text-gray-600 text-left uppercase">
                 <tr>
                     <th scope='col' className='px-2 py-4 xl:px-6'> # </th>
@@ -56,11 +57,14 @@ const Dashboard = () => {
                 </tr>
             </thead>
             <tbody>
-
+                {dashboardData.recentBlogs.map((blog,index)=>{
+                    return <BlogTableItem key={blog._id} blog={blog} fetchBlogs={fetchDashboard} index={index+1}/>
+                })}
             </tbody>
         </table>
         </div>
       </div>
+
     </div>
   )
 }
