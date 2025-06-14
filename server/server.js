@@ -6,11 +6,11 @@ import adminRouter from './routes/adminRoutes.js';
 import blogRouter from './routes/blogRoutes.js';
 
 const app = express();
+app.use(express.json())
 
 await connectDB()
 //Middlewares
 app.use(cors())
-app.use(express.json())
 
 //Routes
 app.get('/',(req,res) => res.send("API is Working"))

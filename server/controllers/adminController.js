@@ -5,7 +5,7 @@ import Comment from '../models/Comments.js';
 export const adminLogin = async (req,res)=>{
     try{
         const {email, password} = req.body;
-
+       
         if(email !== process.env.ADMIN_EMAIL || password !== process.env.ADMIN_PASSWORD){
             return res.json({success: false, message: "Invalid Credentials"})
         }
@@ -57,7 +57,7 @@ export const getDashboard = async (req,res) =>{
 export const deleteCommentById = async (req, res) => {
     try{
         const {id} = req.body;
-        await Comment.findByIdandDelete(id);
+        await Comment.findByIdAndDelete(id);
         res.json({success:true, message:"comments deleted successfully"})
     } catch (error) {
         res.json({success:false, message:error.message})
