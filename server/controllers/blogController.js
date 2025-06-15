@@ -2,6 +2,7 @@ import fs from 'fs'
 import imagekit from '../configs/imageKit.js';
 import Blog from '../models/Blog.js';
 import Comment from '../models/Comments.js';
+import main from '../configs/gemini.js';
 
 export const addBlog = async(req,res) =>{
     try{
@@ -63,7 +64,7 @@ export const getBlogById = async (req,res) => {
 
 export const deleteBlogById = async (req,res) => {
     try{
-        const { id } = req.parse;
+        const { id } = req.body;
         await Blog.findByIdAndDelete(id);
         //Delete all comments associated with the blog
         await Comment.deleteMany({blog: id});
@@ -102,6 +103,16 @@ export const getBlogComments = async (req, res) =>{
         const comments = await Comment.find({blog: blogId, isApproved : true}).sort({createdAt: -1});  //means sort in descendig order new comment first 1:for old, -1:for new
         res.json({success: true, message: comments})
     } catch (error){
+        res.json({success: false, message: error.message})
+    }
+}
+
+export const generateContent = async (req, res) =>{
+    try{
+        const {prompt} = req.body;
+        const content = await main(prompt + ' Generate a blog content for this topic in simple text format')
+        res.json({success: true, content})
+    } catch (error) {
         res.json({success: false, message: error.message})
     }
 }

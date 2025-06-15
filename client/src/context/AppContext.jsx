@@ -10,7 +10,7 @@ const AppContext = createContext();
 // for this we have to create a provider function
 export const AppProvider = ({ children }) =>{
     const navigate  = useNavigate()
-
+ 
     const [token , setToken] = useState(null)
     const [blog, setBlog] = useState([])
     const [input, setInput] = useState("")
@@ -18,24 +18,26 @@ export const AppProvider = ({ children }) =>{
     const fetchBlogs = async ()=>{
         try{
             const {data} = await axios.get('api/blog/all');
-            data.success ? setBlog(data.blog): toast.error(data.message)
+            data.success ? setBlog(data.blogs): toast.error(data.message)
         } catch(error){
             toast.error(error.message)
         }
-    }
+    };
 
     useEffect(()=>{
         fetchBlogs();
         const token = localStorage.getItem('token')
         if(token){
             setToken(token);
-            axios.defaults.headers.common['Authorization'] = `&{token}`;
+            
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // console.log(axios.defaults.headers.common['Authorization']);
         }
     },[])
 
     const value = {
-        axios, navigate, token, setToken, blog, setBlog, input, setInput
-    }
+        axios, navigate, token, setToken, blog, setBlog, input, setInput , fetchBlogs
+    };
 
 
     return(
@@ -45,8 +47,6 @@ export const AppProvider = ({ children }) =>{
         </AppContext.Provider>
     )
 }
-export const useAppContext = ()=>{
-    return useContext(AppContext)
-};
+export const useAppContext = () => useContext(AppContext)
 
 // after this we have to create some data will be shared in diff component , for diff comp we have to make api call to get data form our backend and DB , for this we need api call for api call we need backend varible that is stored in enviroment variables.
