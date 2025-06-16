@@ -7,7 +7,7 @@ const Footer = () => {
       <div className='flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-500/30 text-gray-500'>
         <div>
             <img src={assets.logo} alt='logo' className='w-32 sm:w-44'/>
-            <p className='max-w-[410px] mt-6'>Lorem ipsum dolor sit amet consectetur, adipsicing elit. Rerum unde quaerat eveniet cumque accusamus atque qui error quo enim fugiat?</p>
+            <p className='max-w-[410px] mt-6'>Quickblog is your go-to platform for effortless blogging. Whether you're sharing thoughts, stories, or updates, Quickblog makes it easy to create, customize, and publish beautiful blog posts in minutes—no technical experience required.</p>
         </div>
         <div className='flex flex-wrap justify-between w-full md:w-[45%] gap-5'>
             {footer_data.map((section, index)=>(

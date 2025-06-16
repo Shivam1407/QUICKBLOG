@@ -101,7 +101,7 @@ export const getBlogComments = async (req, res) =>{
     try{
         const {blogId} = req.body;
         const comments = await Comment.find({blog: blogId, isApproved : true}).sort({createdAt: -1});  //means sort in descendig order new comment first 1:for old, -1:for new
-        res.json({success: true, message: comments})
+        res.json({success: true, comments})
     } catch (error){
         res.json({success: false, message: error.message})
     }

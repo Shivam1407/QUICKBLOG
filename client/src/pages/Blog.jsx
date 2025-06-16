@@ -49,6 +49,7 @@ const Blog = () => {
         toast.success(data.message)
         setName('')
         setContent('')
+        fetchComments();
       }else{
         toast.error(data.message);
       }
@@ -101,11 +102,35 @@ const Blog = () => {
         {/* Share Buttons */}
         <div className='my-24 max-w-3xl mx-auto'>
           <p className='font-semibold my-4'>Share this article on social media</p>
-          <div className='flex'>
-            <img src={assets.facebook_icon} alt="" />
-            <img src={assets.twitter_icon} alt="" />
-            <img src={assets.googleplus_icon} alt="" />
-          </div>
+            <div className='flex gap-4'>
+              {/* yhaa facebook ka link */}
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={assets.facebook_icon} alt="Facebook" className="cursor-pointer hover:scale-105 transition" />
+              </a>
+
+              {/* ye twitter ke lie*/}
+              <a
+                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(data.title)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={assets.twitter_icon} alt="Twitter" className="cursor-pointer hover:scale-105 transition" />
+              </a>
+
+              {/* email ke lie */}
+              <a
+                href={`mailto:?subject=${encodeURIComponent(data.title)}&body=Check out this blog: ${encodeURIComponent(window.location.href)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={assets.googleplus_icon} alt="Email" className="cursor-pointer hover:scale-105 transition" />
+              </a>
+            </div>
+
         </div>
       </div>
       <Footer/>

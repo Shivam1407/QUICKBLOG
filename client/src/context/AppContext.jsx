@@ -24,16 +24,14 @@ export const AppProvider = ({ children }) =>{
         }
     };
 
-    useEffect(()=>{
-        fetchBlogs();
-        const token = localStorage.getItem('token')
-        if(token){
-            setToken(token);
-            
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            // console.log(axios.defaults.headers.common['Authorization']);
-        }
-    },[])
+    useEffect(() => {
+    fetchBlogs();
+    const token = localStorage.getItem('token');
+    if (token) {
+        setToken(token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+    }, []);
 
     const value = {
         axios, navigate, token, setToken, blog, setBlog, input, setInput , fetchBlogs
