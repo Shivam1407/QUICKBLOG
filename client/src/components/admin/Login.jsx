@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useAppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
@@ -19,7 +18,7 @@ const Login = () => {
         setToken(data.token);
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
         toast.success("Login successful!");
-        window.location.reload(); 
+        window.location.reload();
       } else {
         toast.error(data.message);
       }
@@ -36,7 +35,14 @@ const Login = () => {
             <h1 className='text-3xl font-bold'><span className='text-primary'>Admin</span> Login</h1>
             <p className='font-light'>Enter your credentials to access the admin panel</p>
           </div>
-          <form onSubmit={handleSubmit} className='mt-6 w-full sm:max-w-md text-gray-600'>
+
+          {/* Demo Credentials Box */}
+          <div className='w-full mb-6 p-4 bg-gray-100 rounded-lg border border-gray-300 text-sm text-gray-700'>
+            <p><strong>Demo ID:</strong> yourpalshivam@gmail.com</p>
+            <p><strong>Password:</strong> greatstack</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className='w-full sm:max-w-md text-gray-600'>
             <div className='flex flex-col'>
               <label>Email</label>
               <input
